@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        /*
+        margin: 0;
+        padding: 0;
+        */
+    }
+
+    input {
+        width: 10px;
+        height: 10px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        background-color: aqua;
+    }
+
+    .disabled {
+        visibility: hidden;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <!-- Linha 1-->
+        <div class="row">
+            <input type="text" id="row1col1" class="disabled">
+            <input type="text" id="row1col2" class="disabled">
+            <input type="text" id="row1col3" class="disabled">
+            <input type="text" id="row1col4" class="disabled">
+            <input type="text" id="row1col5" class="disabled">
+            <input type="text" id="row1col6" onkeyup="fnVerificar_DMA()">
+        </div>
+
+        <!-- Linha 2-->
+        <div class="row">
+            <input type="text" id="row2col1" class="disabled">
+            <input type="text" id="row2col2" class="disabled">
+            <input type="text" id="row2col3" class="disabled">
+            <input type="text" id="row2col4" class="disabled">
+            <input type="text" id="row2col5" class="disabled">
+            <input type="text" id="row2col6" onkeyup="fnVerificar_DMA()">
+        </div>
+
+        <!-- Linha 3-->
+        <div class="row">
+            <input type="text" id="row3col1" class="disabled">
+            <input type="text" id="row3col2" class="disabled">
+            <input type="text" id="row3col3" class="disabled">
+            <input type="text" id="row3col4" class="disabled">
+            <input type="text" id="row3col5" onkeyup="fnVerificar()">
+            <input type="text" id="row3col6" onkeyup="fnVerificar_DMA()">
+            <input type="text" id="row3col7" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 4-->
+
+        <div class="row">
+            <input type="text" id="row4col1" class="disabled">
+            <input type="text" id="row4col2" class="disabled">
+            <input type="text" id="row4col3" class="disabled">
+            <input type="text" id="row4col4" class="disabled">
+            <input type="text" id="row4col5" class="disabled">
+            <input type="text" id="row4col6" class="disabled">
+            <input type="text" id="row4col7" onkeyup="fnVerificar()">
+            <input type="text" id="row4col8" onkeyup="fnVerificar()">
+            <input type="text" id="row4col9" onkeyup="fnVerificar()">
+            <input type="text" id="row4col10" onkeyup="fnVerificar()">
+            <input type="text" id="row4col11" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 5-->
+
+        <div class="row">
+            <input type="text" id="row5col1" class="disabled">
+            <input type="text" id="row5col2" class="disabled">
+            <input type="text" id="row5col3" class="disabled">
+            <input type="text" id="row5col4" class="disabled">
+            <input type="text" id="row5col5" onkeyup="fnVerificar()">
+            <input type="text" id="row5col6" onkeyup="fnVerificar()">
+            <input type="text" id="row5col7" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 6-->
+
+        <div class="row">
+            <input type="text" id="row6col1" class="disabled">
+            <input type="text" id="row6col2" class="disabled">
+            <input type="text" id="row6col3" class="disabled">
+            <input type="text" id="row6col4" class="disabled">
+            <input type="text" id="row6col5" class="disabled">
+            <input type="text" id="row6col6" class="disabled">
+            <input type="text" id="row6col7" onkeyup="fnVerificar()">
+            <input type="text" id="row6col8" class="disabled">
+            <input type="text" id="row6col9" class="disabled">
+            <input type="text" id="row6col10" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 7-->
+
+        <div class="row">
+            <input type="text" id="row7col1" class="disabled">
+            <input type="text" id="row7col2" class="disabled">
+            <input type="text" id="row7col3" class="disabled">
+            <input type="text" id="row7col4" class="disabled">
+            <input type="text" id="row7col5" class="disabled">
+            <input type="text" id="row7col6" class="disabled">
+            <input type="text" id="row7col7" onkeyup="fnVerificar()">
+            <input type="text" id="row7col8" onkeyup="fnVerificar()">
+            <input type="text" id="row7col9" onkeyup="fnVerificar()">
+            <input type="text" id="row7col10" onkeyup="fnVerificar()">
+            <input type="text" id="row7col11" onkeyup="fnVerificar()">
+            <input type="text" id="row7col12" onkeyup="fnVerificar()">
+            <input type="text" id="row7col13" onkeyup="fnVerificar()">
+            <input type="text" id="row7col14" onkeyup="fnVerificar()">
+            <input type="text" id="row7col15" onkeyup="fnVerificar()">
+            <input type="text" id="row7col16" onkeyup="fnVerificar()">
+            <input type="text" id="row7col17" onkeyup="fnVerificar()">
+            <input type="text" id="row7col18" onkeyup="fnVerificar()">
+            <input type="text" id="row7col19" onkeyup="fnVerificar()">
+        </div>
+
+        <!-- Linha 8-->
+
+        <div class="row">
+            <input type="text" id="row8col1" class="disabled">
+            <input type="text" id="row8col2" class="disabled">
+            <input type="text" id="row8col3" class="disabled">
+            <input type="text" id="row8col4" class="disabled">
+            <input type="text" id="row8col5" class="disabled">
+            <input type="text" id="row8col6" onkeyup="fnVerificar()">
+            <input type="text" id="row8col7" onkeyup="fnVerificar()">
+        </div>
+
+        <!-- Linha 9-->
+
+        <div class="row">
+            <input type="text" id="row9col1" onkeyup="fnVerificar()">
+            <input type="text" id="row9col2" onkeyup="fnVerificar()">
+            <input type="text" id="row9col3" onkeyup="fnVerificar()">
+            <input type="text" id="row9col4" onkeyup="fnVerificar()">
+            <input type="text" id="row9col5" onkeyup="fnVerificar()">
+            <input type="text" id="row9col6" onkeyup="fnVerificar()">
+            <input type="text" id="row9col7" onkeyup="fnVerificar()">
+            <input type="text" id="row9col8" onkeyup="fnVerificar()">
+            <input type="text" id="row9col9" onkeyup="fnVerificar()">
+            <input type="text" id="row9col10" onkeyup="fnVerificar()">
+            <input type="text" id="row9col11" onkeyup="fnVerificar()">
+            <input type="text" id="row9col12" onkeyup="fnVerificar()">
+            <input type="text" id="row9col13" onkeyup="fnVerificar()">
+            <input type="text" id="row9col14" onkeyup="fnVerificar()">
+            <input type="text" id="row9col15" onkeyup="fnVerificar()">
+            <input type="text" id="row9col16" onkeyup="fnVerificar()">
+            <input type="text" id="row9col17" onkeyup="fnVerificar()">
+        </div>
+
+        <!-- Linha 10-->
+
+        <div class="row">
+            <input type="text" id="row10col1" class="disabled">
+            <input type="text" id="row10col2" class="disabled">
+            <input type="text" id="row10col3" class="disabled">
+            <input type="text" id="row10col4" class="disabled">
+            <input type="text" id="row10col5" class="disabled">
+            <input type="text" id="row10col6" class="disabled">
+            <input type="text" id="row10col7" onkeyup="fnVerificar()">
+        </div>
+
+        <!-- Linha 11-->
+
+        <div class="row">
+            <input type="text" id="row11col1" class="disabled">
+            <input type="text" id="row11col2" class="disabled">
+            <input type="text" id="row11col3" class="disabled">
+            <input type="text" id="row11col4" class="disabled">
+            <input type="text" id="row11col5" class="disabled">
+            <input type="text" id="row11col6" class="disabled">
+            <input type="text" id="row11col7" onkeyup="fnVerificar()">
+            <input type="text" id="row11col8" onkeyup="fnVerificar()">
+            <input type="text" id="row11col9" onkeyup="fnVerificar()">
+            <input type="text" id="row11col10" onkeyup="fnVerificar()">
+            <input type="text" id="row11col11" onkeyup="fnVerificar()">
+            <input type="text" id="row11col12" onkeyup="fnVerificar()">
+            <input type="text" id="row11col13" onkeyup="fnVerificar()">
+            <input type="text" id="row11col14" onkeyup="fnVerificar()">
+            <input type="text" id="row11col15" onkeyup="fnVerificar()">
+        </div>
+
+        <!-- Linha 12-->
+
+        <div class="row">
+            <input type="text" id="row12col1" class="disabled">
+            <input type="text" id="row12col2" class="disabled">
+            <input type="text" id="row12col3" class="disabled">
+            <input type="text" id="row12col4" class="disabled">
+            <input type="text" id="row12col5" class="disabled">
+            <input type="text" id="row12col6" class="disabled">
+            <input type="text" id="row12col7" onkeyup="fnVerificar()">
+            <input type="text" id="row12col8" class="disabled">
+            <input type="text" id="row12col9" class="disabled">
+            <input type="text" id="row12col10" class="disabled">
+            <input type="text" id="row12col11" class="disabled">
+            <input type="text" id="row12col12" onkeyup="fnVerificar()">
+        </div>
+
+        <!-- Linha 13-->
+        <div class="row">
+            <input type="text" id="row13col1" class="disabled">
+            <input type="text" id="row13col2" class="disabled">
+            <input type="text" id="row13col3" class="disabled">
+            <input type="text" id="row13col4" class="disabled">
+            <input type="text" id="row13col5" class="disabled">
+            <input type="text" id="row13col6" class="disabled">
+            <input type="text" id="row13col7" onkeyup="fnVerificar()">
+        </div>
+
+        <!-- Linha 14-->
+
+        <div class="row">
+            <input type="text" id="row14col1" class="disabled">
+            <input type="text" id="row14col2" class="disabled">
+            <input type="text" id="row14col3" class="disabled">
+            <input type="text" id="row14col4" class="disabled">
+            <input type="text" id="row14col5" class="disabled">
+            <input type="text" id="row14col6" class="disabled">
+            <input type="text" id="row14col7" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 15-->
+
+        <div class="row">
+            <input type="text" class="disabled">
+            <input type="text" class="disabled">
+            <input type="text" class="disabled">
+            <input type="text" class="disabled">
+            <input type="text" id="row15col1" onkeyup="fnVerificar()">
+            <input type="text" id="row15col2" onkeyup="fnVerificar()">
+            <input type="text" id="row15col3" onkeyup="fnVerificar()">
+            <input type="text" id="row15col4" onkeyup="fnVerificar()">
+            <input type="text" id="row15col5" onkeyup="fnVerificar()">
+            <input type="text" id="row15col6" onkeyup="fnVerificar()">
+            <input type="text" id="row15col7" onkeyup="fnVerificar()">
+            <input type="text" id="row15col8" onkeyup="fnVerificar()">
+            <input type="text" id="row15col9" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 16-->
+
+        <div class="row">
+            <input type="text" id="row16col1" class="disabled">
+            <input type="text" id="row16col2" class="disabled">
+            <input type="text" id="row16col3" class="disabled">
+            <input type="text" id="row16col4" class="disabled">
+            <input type="text" id="row16col5" class="disabled">
+            <input type="text" id="row16col6" class="disabled">
+            <input type="text" id="row16col7" onkeyup="fnVerificar()">
+            <input type="text" id="row16col8" class="disabled">
+            <input type="text" id="row16col9" class="disabled">
+            <input type="text" id="row16col10" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 17-->
+
+        <div class="row">
+            <input type="text" id="row17col1" class="disabled">
+            <input type="text" id="row17col2" class="disabled">
+            <input type="text" id="row17col3" class="disabled">
+            <input type="text" id="row17col4" class="disabled">
+            <input type="text" id="row17col5" class="disabled">
+            <input type="text" id="row17col6" class="disabled">
+            <input type="text" id="row17col7" onkeyup="fnVerificar()">
+            <input type="text" id="row17col8" class="disabled">
+            <input type="text" id="row17col9" class="disabled">
+            <input type="text" id="row17col10" onkeyup="fnVerificar()">
+        </div>
+
+
+        <!-- Linha 18-->
+
+        <div class="row">
+            <input type="text" id="row18col1" class="disabled">
+            <input type="text" id="row18col2" class="disabled">
+            <input type="text" id="row18col3" class="disabled">
+            <input type="text" id="row18col4" class="disabled">
+            <input type="text" id="row18col5" onkeyup="fnVerificar()">
+            <input type="text" id="row18col6" onkeyup="fnVerificar()">
+            <input type="text" id="row18col7" onkeyup="fnVerificar()">
+        </div>
+
+        <p id="pontos">0</p>
+    </div>
+</body>
+
+</html>
+<script>
+    var letter_row1col6;
+    var letter_row2col6;
+    var letter_row3col5;
+    var letter_row3col6;
+    var letter_row3col7;
+    var letter_row4col7;
+    var letter_row4col8;
+    var letter_row4col9;
+    var letter_row4col10;
+    var letter_row4col11;
+    var letter_row5col5;
+    var letter_row5col6;
+    var letter_row5col7;
+    var letter_row6col6;
+    var letter_row6col9;
+    var letter_row7col7;
+    var letter_row7col8;
+    var letter_row7col9;
+    var letter_row7col10;
+    var letter_row7col11
+    var letter_row7col12;
+    var letter_row7col13;
+    var letter_row7col14;
+    var letter_row7col15;
+    var letter_row7col16;
+    var letter_row7col17;
+    var letter_row7col18;
+    var letter_row7col19;
+    var letter_row8col6;
+    var letter_row8col7;
+    var letter_row9col1;
+    var letter_row9col2;;
+    var letter_row9col3;;
+    var letter_row9col4;;
+    var letter_row9col5;;
+    var letter_row9col6;;
+    var letter_row9col7;;
+    var letter_row9col8;;
+    var letter_row9col9;;
+    var letter_row9col10;
+    var letter_row9col11;
+    var letter_row9col12;
+    var letter_row9col13;
+    var letter_row9col14;
+    var letter_row9col15;
+    var letter_row9col16;
+    var letter_row9col17;
+    var letter_row10col7;
+    var letter_row11col7;
+    var letter_row11col8;
+    var letter_row11col9;
+    var letter_row11col10;
+    var letter_row11col11;
+    var letter_row11col12;
+    var letter_row11col13;
+    var letter_row11col14;
+    var letter_row11col15;
+    var letter_row12col7;
+    var letter_row12col12;
+    var letter_row13col7;
+    var letter_row14col7;
+    var letter_row15col5;
+    var letter_row15col6;
+    var letter_row15col7;
+    var letter_row15col8;
+    var letter_row15col9;
+    var letter_row16col7;
+    var letter_row16col10;
+    var letter_row17col7;
+    var letter_row17col10;
+    var letter_row18col5;
+    var letter_row18col6;
+    var letter_row18col7;
+
+    function fnVerificar_DMA() {
+
+        letter_row1col6 = row1col6.value;
+        letter_row2col6 = row2col6.value;
+        letter_row3col6 = row3col6.value;
+
+        if (letter_row1col6.toUpperCase() == "D" & letter_row2col6.toUpperCase() == "M" & letter_row3col6.toUpperCase() == "A") {
+            alert("Você acertou a primeira palavra: DMA");
+            pontos.innerHTML = Number(pontos.innerHTML) + 1;
+            row1col6.disabled = true;
+            row2col6.disabled = true;
+            row3col6.disabled = true;
+        }
+
+
+
+    }
+
+
+</script>
