@@ -3,8 +3,44 @@
     padding: 0;
 }
 
+.popup{
+    background-color: red;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.container{
+    display: flex;
+    /*width: 80%;*/
+}
+
 input {
-    width: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.rows{
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.infos{
+    flex-basis: 0;
+    flex-grow: 1;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock{
+    font-size: 4rem;
+}
+
+.infos button{
+
 }
 
 .row {
@@ -15,4 +51,16 @@ input {
 
 .disabled {
     visibility: hidden;
+}
+
+.dicas{
+    display: flex;
+}
+
+.box{
+    flex-grow: 1;
+}
+
+.buttons{
+    display: flex;
 }
