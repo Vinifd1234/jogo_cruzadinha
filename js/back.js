@@ -1,8 +1,46 @@
+var pontos_jogador = 0;
+var entrada = false;
+var nome_jogador;
+
+// Armazena todas as inputs em uma variável
+var campos = document.getElementsByTagName('input');
+// Cria uma lista de elementos vazia para armazenar os campos filtrados (nessa regra de regócio, campos filtrados = campos que não pertencem à classe "disabled")
+var campos_filtrados = [];
+
+/* Agrupando em uma lista (boxes) todos os elementos que possuem a classe "box" */
+var boxes = document.getElementsByClassName('box');
+/* Definindo o 1° elemento da lista boxes com visibilidade: escondida*/
+boxes[0].style.visibility = "hidden";
+/* Definindo o 2° elemento da lista boxes com visibilidade: escondida*/
+boxes[1].style.visibility = "hidden";
+
+/*Atribuindo à div que possui os botões "Iniciar, Pausar e reiniciar" display: none*/
+buttons_game.style.display = "none";
+// Desabilitando os botões pausar e reiniciar
+btn_reiniciar.disabled = true;
+btn_pausar.disabled = true;
+
+/* Filtrando o vetor campos, descartando todos os que tiverem "disabled" no nome de sua classe */
+//Percorrendo todos os itens do vetores
+for (let i = 0; i < campos.length; i++) {
+    // Se o campo relacionado tiver a classname diferente de "disabled", adicionar (push) esse campo à lista campos_filtrados
+    if (campos[i].className != "disabled" && campos[i].className != "indicador") {
+        campos_filtrados.push(campos[i]);
+    }
+}
+
+
+
+
+
+
 /* Função para desabilitar os campos filtrados*/
 function fnDesabilitarCampos() {
     for (var i = 0; i < campos_filtrados.length; i++) {
         campos_filtrados[i].disabled = true;
     }
+
+
 }
 
 /* Função para habilitar os campos filtrados*/
@@ -206,10 +244,14 @@ function fnEntrada() {
 
         if (nome_jogador != "" & nome_jogador != null) {
             entrada = true;
+            // Atribuindo mensagem de "boa sorte" ao usuário
+            good_luck.innerHTML = `Boa sorte, ${nome_jogador}`;
             fnDesabilitarCampos();
         }
     }
 }
+
+
 
 /* Aqui começa o cronometro */
 
@@ -236,12 +278,13 @@ function cronometro() {
         }
     }
 
+
     // o setTimeout executa uma função depois de um determinado tempo, dado em milissegundos
     relogio = setTimeout(function () {
         // Caso a variável segundos e a minutos sejam iguais à 0, pause o cronometro e de um alert, pois significa que o tempo acabou.
         if (segundos == 0 & minutos == 0) {
-            alert('Tempo acabou!!!');
-            fnPausar();
+            alert('Você perdeu, não conseguiu completar à tempo!');
+            fnReiniciar();
             // Se não, perguntar se segundos é menor do que 1, ou seja, 0 ou menor
         } else {
             if (segundos < 1) {
@@ -261,80 +304,72 @@ function cronometro() {
 A partir disso, a cada 1 segundo, o valor da variavel de segundos decai em 1 unidade, quando chegar em 0, após 60 vezes ou 30 vezes, é decrementado
 1 unidade, isso até ambas variaveis valerem 0 e aí emitir o alerta que o tempo acabou e posteriormente ativar a função de pausa do cronometro  */
 
+function fnBtnIniciar(situacao) {
+    if (situacao == 0) {
+        btn_iniciar.disabled = true;
+    } else {
+        btn_iniciar.disabled = false;
 
-/* A função de iniciar o cronometro chama a função do cronometro, desabilita os botões "iniciar", "reiniciar e os botões de dificuldade", assim 
-como exibe as dicas das palavras*/
-function fnIniciar() {
-    cronometro();
-    btn_iniciar.disabled = true;
-    btn_pausar.disabled = false;
-    btn_reiniciar.disabled = true;
-    btn_dificuldade1.disabled = true;
-    btn_dificuldade2.disabled = true;
-    btn_dificuldade3.disabled = true;
+    }
+}
 
-    boxes[0].style.visibility = "";
-    boxes[1].style.visibility = "";
+function fnBtnPausar(situacao) {
+    if (situacao == 0) {
+        btn_pausar.disabled = true;
+    } else {
+        btn_pausar.disabled = false;
+    }
+}
 
-    /* Também é rodado uma função para que todos os campos sejam liberados para o usuários*/
-    fnHabilitarCampos()
+function fnBtnReiniciar(situacao) {
+    if (situacao == 0) {
+        btn_reiniciar.disabled = true;
+    } else {
+        btn_reiniciar.disabled = false;
+    }
+}
 
+function fnBtnsDificuldade(situacao) {
+    if (situacao == 0) {
+        btn_dificuldade1.disabled = true;
+        btn_dificuldade2.disabled = true;
+        btn_dificuldade3.disabled = true;
+    } else {
+        btn_dificuldade1.disabled = false;
+        btn_dificuldade2.disabled = false;
+        btn_dificuldade3.disabled = false;
+    }
+}
+
+function fnDicas(situacao) {
+    if (situacao == 0) {
+        boxes[0].style.visibility = "hidden";
+        boxes[1].style.visibility = "hidden";
+    } else {
+        boxes[0].style.visibility = "";
+        boxes[1].style.visibility = "";
+    }
 }
 
 
-/* A função de pausa, pausará o cronometro, utilizando um metódo (clearTimeout), e também habilita os botões reiniciar e iniciar, assim como
-esconcendo as dicas das palavras */
-function fnPausar() {
-    clearTimeout(relogio);
-    btn_reiniciar.disabled = false;
-    btn_pausar.disabled = true;
-    btn_iniciar.disabled = false;
-
-    boxes[0].style.visibility = "hidden";
-    boxes[1].style.visibility = "hidden";
-
-    /* Também é rodado um laço de repetição para que todos os campos sejam liberados para o usuários*/
-    for (var i = 0; i < campos_filtrados.length; i++) {
-        campos_filtrados[i].disabled = true;
-    }
-
-}
-
-function fnReiniciar() {
-    /* A função reiniciar habilita todas as configurações de inicio de página supracitadas */
-    btn_dificuldade1.disabled = false;
-    btn_dificuldade2.disabled = false;
-    btn_dificuldade3.disabled = false;
-
-    buttons_game.style.display = "none";
-    btn_reiniciar.disabled = true;
-    btn_pausar.disabled = true;
-
-    //Além de zerar o cronometro
-    clock.innerHTML = "00:00";
-
-    boxes[0].style.visibility = "hidden";
-    boxes[1].style.visibility = "hidden";
-
-    minutos = Number(clock.innerHTML.substring(0, 2));
-    segundos = Number(clock.innerHTML.substring(3));
-
-    pontos.innerHTML = "";
-    pontos_jogador = 0;
-
-    let contador = 0;
-    while (contador < palavras.length) {
-        palavras[contador] = false;
-        contador++;
-    }
-
-    fnLimparCampos();
-    for (var i = 0; i < campos_filtrados.length; i++) {
-        campos_filtrados[i].disabled = true;
-    }
-
-
-}
+// Criação da lista das dicas, cada posição é a dica de respectiva dificuldade, ou seja, o primeiro item da dica do CPU, será equivalente a dica caso o usuário
+// escolha a dificuldade fácil, a 2 caso escolha médio e a 3 caso escolha dificil
+var cpu = ["1. É a unidade central de processamento. (vertical)", "1. Onde ocorrem a execução das instruções aritméticas, lógicas e de controle de entrada e saída (vertical)", "1. Is the eletronic circuit within a computer that carries out the instructions of a computer program (vertical)"];
+var ula = ["2. Realiza as operações aritméticas inteiras e lógicas bit a bit (horizontal)", "2. Parte do processador responsável por cálculo aritméticos inteiros e bit a bit (horizontal)", "2. A digital circuit within the processor that performs integer arithmetic and bitwise logic operations (horizontal)"];
+var registradores = ["3. Armazenamento local de dados que estão sendo processados pelo processador (horizontal)", "3. Armazenamento local de dados que estão sendo processados pelo processador (horizontal)", "3. A local storage space on a processor that holds data that is being processed by processor (horizontal)"];
+var RAM = ["4. Memória que armazena os dados que estão sendo ativamente utilizados pelo computador. (horizontal)", "4. Quando o computador desliga, os dados dessa memória são perdidos. (horizontal)", "4. Gives applications a place to store and access data on a short-term basis. (horizontal)"];
+var ROM = ["5. Memória que armazena de forma permanente dados em computadores (horizontal)", "5. Contém os programas essenciais para inicialização do sistema. (horizontal)", "5. A type of storage medium that permanently stores data on PC and eletronic devices. (horizontal)"];
+var Eprom = ["6. Memória que retrai dados mesmo sem energia. (horizontal)", "6. Pode ser manipulada via raios ultravioletas (UV) (horizontal)", "6. Is a type of ROM chip  that can retain the data even if there is no power supply. (horizontal)"];
+var Flash = ["7. Memória utilizada para transferência de dados entre computadores. (vertical)", "7. É encontrado em pen drives, MP3 Players, etc.. (vertical)", "7. Is a non-volatile memory chip used for storage and for transfering data between a pc and digital devices. (vertical)"];
+var memoria_de_massa = ['8. "Memória" utilizada para armazenar amostras grandes de dados. (vertical)', "8. 'Memória' que retrai os dados mesmo com o computador desligado. (vertical)", "8. Refers to various techniques and devices for storing large amount of data. (vertical)"];
+var dma = ["9. Permite um dispositivo de entrada ou saída à acessar dados diretos da memória. (vertical)", "9. Transferência de dados entre dispositivos de E/S e a memória sem a necessidade do processador (vertical)", "9. Is a method that allows an I/O device to send or receive data directly to or from the main memory. (vertical)"];
+var cs = ["10. Uma linha de controle, utilizada para selecionar um circuito integrado dos vários conectados no mesmo barramento. (vertical)", "10. Uma linha de controle, utilizada para selecionar um circuito integrado dos vários conectados no mesmo barramento. (vertical)", "10. Is the control line used to select one of integrated circuits out of several connected the same computer bus. (vertical)"];
+var addres_bus = ["11. É utilizado para especificar um endereço físico. (horizontal)", "11. É utilizado para especificar um endereço físico. (horizontal)", "11. Is a bus that is used to specifly a physical adress. (horizontal)"];
+var data_bus = ["12. Fornece transporte para os dados. (Invertido) (horizontal) ", "12. Fornece transporte para os dados. (Invertido) (horizontal)", "12. Provides transportation for data. (inverted) (Horizontal)"];
+var i5 = ["13. Processadores de média performance da Intel (vertical)", "13. Na linha de desempenho, estão acima do i3 e abaixo do i7 (vertical)", "13. Is one of four types of processors in the 'i' series. (vertical)"];
+var i7 = ["14. Processadores de alta performance da Intel (Invertido) (horizontal)", "14. Na linha de desempenho, estão acima do i5 e abaixo do i9 (Invertido) (horizontal)", "14. Launched at 2009, in majority, has eight cores in your structure (Inverted) (horizontal)"];
+var dual_core = ["15. É a classificação de um processador que possui 2 núcleos. (horizontal)", "15. Processador composto por dois 'MicroProcessadores' que trabalham simultaneamente. (horizontal)", "15. A CPU that has two distinct processor that works simultaneously in the same integrated circuit. (horizontal)"];
+var quad_core = ["16. É a classificação de um processador que possui 4 núcléos. (horizontal)", "16. Processador composto por quatro 'MicroProcessadores' que trabalham simultaneamente. (horizontal)", "16. A CPU that has four distinct processor that works simultaneously in the same integrated circuit. (horizontal)"];
 
 var palavras = [
     /*cpu: */false,
@@ -355,16 +390,8 @@ var palavras = [
     /*quad_core: */false
 ]
 
-
-/* A função de dificuldade espera um parametro definindo a dificuldade, para que assim sejam setados o tempos e as dicas respectivos */
-function fnDificuldade(dificuldade) {
-    // Faz aparecer a div de botões
-    buttons_game.style.display = "flex";
-    //Se o usuário clicou na dificuldade "facil", então o tempo será de 10 minutos e as dicas serão o primeiro item de cada lista (das dicas)
-    if (dificuldade == 1) {
-        clock.innerHTML = "10:00";
-        minutos = Number(clock.innerHTML.substring(0, 2));
-        segundos = Number(clock.innerHTML.substring(3));
+function fnDefinicao(definicao) {
+    if (definicao == 1) {
         item1.innerHTML = cpu[0];
         item2.innerHTML = ula[0];
         item3.innerHTML = registradores[0];
@@ -381,12 +408,7 @@ function fnDificuldade(dificuldade) {
         item14.innerHTML = i7[0];
         item15.innerHTML = dual_core[0];
         item16.innerHTML = quad_core[0];
-
-    } //Se o usuário clicou na dificuldade "média", então o tempo será de 07 minutos e meio e as dicas serão o segundo item de cada lista (das dicas)
-    else if (dificuldade == 2) {
-        clock.innerHTML = "07:30";
-        minutos = Number(clock.innerHTML.substring(0, 2));
-        segundos = Number(clock.innerHTML.substring(3));
+    } else if (definicao == 2) {
         item1.innerHTML = cpu[1];
         item2.innerHTML = ula[1];
         item3.innerHTML = registradores[1];
@@ -403,11 +425,7 @@ function fnDificuldade(dificuldade) {
         item14.innerHTML = i7[1];
         item15.innerHTML = dual_core[1];
         item16.innerHTML = quad_core[1];
-    } // Se o usuário não escolheu nem a fácil, nem a média, então terá escolhido a dificil, logo terá 5 minutos para resolver e as dicas correspondentes ao terceiro item de cada lista (das dicas)
-    else {
-        clock.innerHTML = "05:00";
-        minutos = Number(clock.innerHTML.substring(0, 2));
-        segundos = Number(clock.innerHTML.substring(3));
+    } else {
         item1.innerHTML = cpu[2];
         item2.innerHTML = ula[2];
         item3.innerHTML = registradores[2];
@@ -427,24 +445,32 @@ function fnDificuldade(dificuldade) {
     }
 }
 
-// Criação da lista das dicas, cada posição é a dica de respectiva dificuldade, ou seja, o primeiro item da dica do CPU, será equivalente a dica caso o usuário
-// escolha a dificuldade fácil, a 2 caso escolha médio e a 3 caso escolha dificil
-var cpu = ["Definição 1", "Definição 2", "Definição 3"];
-var ula = ["Definição 1", "Definição 2", "Definição 3"];
-var registradores = ["Definição 1", "Definição 2", "Definição 3"];
-var RAM = ["Definição 1", "Definição 2", "Definição 3"];
-var ROM = ["Definição 1", "Definição 2", "Definição 3"];
-var Eprom = ["Definição 1", "Definição 2", "Definição 3"];
-var Flash = ["Definição 1", "Definição 2", "Definição 3"];
-var memoria_de_massa = ["Definição 1", "Definição 2", "Definição 3"];
-var dma = ["Definição 1", "Definição 2", "Definição 3"];
-var cs = ["Definição 1", "Definição 2", "Definição 3"];
-var addres_bus = ["Definição 1", "Definição 2", "Definição 3"];
-var data_bus = ["Definição 1", "Definição 2", "Definição 3"];
-var i5 = ["Definição 1", "Definição 2", "Definição 3"];
-var i7 = ["Definição 1", "Definição 2", "Definição 3"];
-var dual_core = ["Definição 1", "Definição 2", "Definição 3"];
-var quad_core = ["Definição 1", "Definição 2", "Definição 3"];
+/* A função de dificuldade espera um parametro definindo a dificuldade, para que assim sejam setados o tempos e as dicas respectivos */
+function fnDificuldade(dificuldade) {
+    // Faz aparecer a div de botões
+    buttons_game.style.display = "flex";
+
+    //Se o usuário clicou na dificuldade "facil", então o tempo será de 10 minutos e as dicas serão o primeiro item de cada lista (das dicas)
+    if (dificuldade == 1) {
+        clock.innerHTML = "10:00";
+        minutos = Number(clock.innerHTML.substring(0, 2));
+        segundos = Number(clock.innerHTML.substring(3));
+        fnDefinicao(1);
+
+    } //Se o usuário clicou na dificuldade "média", então o tempo será de 07 minutos e meio e as dicas serão o segundo item de cada lista (das dicas)
+    else if (dificuldade == 2) {
+        clock.innerHTML = "07:30";
+        minutos = Number(clock.innerHTML.substring(0, 2));
+        segundos = Number(clock.innerHTML.substring(3));
+        fnDefinicao(2);
+    } // Se o usuário não escolheu nem a fácil, nem a média, então terá escolhido a dificil, logo terá 5 minutos para resolver e as dicas correspondentes ao terceiro item de cada lista (das dicas)
+    else {
+        clock.innerHTML = "05:00";
+        minutos = Number(clock.innerHTML.substring(0, 2));
+        segundos = Number(clock.innerHTML.substring(3));
+        fnDefinicao(3);
+    }
+}
 
 /*Aqui começam as verificações das respostas. 
 
@@ -475,8 +501,12 @@ function fnVerificar_cpu() {
         row16col10.disabled = true;
         row17col10.disabled = true;
         palavras[0] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -491,8 +521,12 @@ function fnVerificar_ula() {
         row18col6.disabled = true;
         row18col7.disabled = true;
         palavras[1] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -529,8 +563,14 @@ function fnVerificar_registradores() {
         row7col18.disabled = true;
         row7col19.disabled = true;
         palavras[2] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
+
+
     }
 }
 
@@ -544,8 +584,12 @@ function fnVerificar_ram() {
         row3col6.disabled = true;
         row3col7.disabled = true;
         palavras[3] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -559,8 +603,12 @@ function fnVerificar_rom() {
         row5col6.disabled = true;
         row5col7.disabled = true;
         palavras[4] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -580,9 +628,13 @@ function fnVerificar_eprom() {
         row4col11.disabled = true;
         alert("Você acertou a palavra: Eprom");
         pontos.innerHTML = Number(pontos.innerHTML) + 1;
-        pontos_jogador++;
         palavras[5] = true;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -602,8 +654,12 @@ function fnVerificar_flash() {
         row7col19.disabled = true;
         row8col19.disabled = true;
         palavras[6] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -646,8 +702,12 @@ function fnVerificar_memoria_de_massa() {
         row17col7.disabled = true;
         row18col7.disabled = true;
         palavras[7] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -665,8 +725,12 @@ function fnVerificar_DMA() {
         row2col6.disabled = true;
         row3col6.disabled = true;
         palavras[8] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -678,8 +742,12 @@ function fnVerificar_cs() {
         row11col12.disabled = true;
         row12col12.disabled = true;
         palavras[9] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -710,8 +778,12 @@ function fnVerificar_address_bus() {
         row9col16.disabled = true;
         row9col17.disabled = true;
         palavras[10] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -735,8 +807,13 @@ function fnVerificar_data_bus() {
         row9col2.disabled = true;
         row9col1.disabled = true;
         palavras[11] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -749,8 +826,13 @@ function fnVerificar_i5() {
         row8col6.disabled = true;
         row8col7.disabled = true;
         palavras[12] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 }
 
@@ -764,8 +846,13 @@ function fnVerificar_i7() {
         row6col10.disabled = true;
         row7col10.disabled = true;
         palavras[13] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
     }
 
 }
@@ -797,8 +884,14 @@ function fnVerificar_dualcore() {
         row11col14.disabled = true;
         row11col15.disabled = true;
         palavras[14] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+        }
+
     }
 
 }
@@ -826,10 +919,29 @@ function fnVerificar_quadcore() {
         row15col11.disabled = true;
         row15col12.disabled = true;
         row15col13.disabled = true;
+
         palavras[15] = true;
-        pontos_jogador++;
-        pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+        fnSomaPonto();
+
+        /* Verifica se o usuário acertou todas */
+        if (fnVerificarPontos(pontos_jogador)) {
+            alert('Você ganhou!!');
+            clock.innerHTML = "00:00";
+        }
     }
 
 }
 
+/* Função para verificar se o usuário "ganhou"*/
+function fnVerificarPontos(pontos) {
+    if (pontos == 16) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function fnSomaPonto() {
+    pontos_jogador++;
+    pontos.innerHTML = `Pontos: ${pontos_jogador}`;
+}
