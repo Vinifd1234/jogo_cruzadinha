@@ -7,6 +7,8 @@ var campos = document.getElementsByTagName('input');
 // Cria uma lista de elementos vazia para armazenar os campos filtrados (nessa regra de regócio, campos filtrados = campos que não pertencem à classe "disabled")
 var campos_filtrados = [];
 
+var campos_espacos = [];
+
 /* Agrupando em uma lista (boxes) todos os elementos que possuem a classe "box" */
 var boxes = document.getElementsByClassName('box');
 /* Definindo o 1° elemento da lista boxes com visibilidade: escondida*/
@@ -24,9 +26,17 @@ btn_pausar.disabled = true;
 //Percorrendo todos os itens do vetores
 for (let i = 0; i < campos.length; i++) {
     // Se o campo relacionado tiver a classname diferente de "disabled", adicionar (push) esse campo à lista campos_filtrados
-    if (campos[i].className != "disabled" && campos[i].className != "indicador") {
+    if (campos[i].className != "disabled" && campos[i].className != "indicador" && campos[i].className != "space") {
         campos_filtrados.push(campos[i]);
     }
+}
+
+function fnEspacos(){
+for (let i = 0; i < campos.length; i++) {
+    if (campos[i].className == "space") {
+        campos[i].disabled = true;
+    }
+}
 }
 
 

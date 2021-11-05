@@ -12,6 +12,7 @@ function fnIniciar() {
     fnBtnsDificuldade(0);
     fnDicas(1);
     fnHabilitarCampos();
+    fnEspacos();
 }
 
 
@@ -53,6 +54,7 @@ function fnReiniciar() {
 
     fnLimparCampos();
     fnDesabilitarCampos();
+    fnEspacos();
 }
 
 
