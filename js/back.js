@@ -7,7 +7,7 @@ var campos = document.getElementsByTagName('input');
 // Cria uma lista de elementos vazia para armazenar os campos filtrados (nessa regra de regócio, campos filtrados = campos que não pertencem à classe "disabled")
 var campos_filtrados = [];
 
-var campos_espacos = [];
+var campos_espacos = document.getElementsByClassName('space');
 
 /* Agrupando em uma lista (boxes) todos os elementos que possuem a classe "box" */
 var boxes = document.getElementsByClassName('box');
@@ -32,11 +32,6 @@ for (let i = 0; i < campos.length; i++) {
 }
 
 function fnEspacos(){
-for (let i = 0; i < campos.length; i++) {
-    if (campos[i].className == "space") {
-        campos[i].disabled = true;
-    }
-}
 }
 
 
@@ -48,6 +43,10 @@ for (let i = 0; i < campos.length; i++) {
 function fnDesabilitarCampos() {
     for (var i = 0; i < campos_filtrados.length; i++) {
         campos_filtrados[i].disabled = true;
+    }
+
+    for(var i = 0; i < campos_espacos.length; i++){
+        campos_espacos[i].disabled = true;
     }
 
 
@@ -293,7 +292,6 @@ function cronometro() {
     relogio = setTimeout(function () {
         // Caso a variável segundos e a minutos sejam iguais à 0, pause o cronometro e de um alert, pois significa que o tempo acabou.
         if (segundos == 0 & minutos == 0) {
-            alert('Você perdeu, não conseguiu completar à tempo!');
             fnReiniciar();
             // Se não, perguntar se segundos é menor do que 1, ou seja, 0 ou menor
         } else {
@@ -572,6 +570,8 @@ function fnVerificar_registradores() {
         row7col17.disabled = true;
         row7col18.disabled = true;
         row7col19.disabled = true;
+
+        
         palavras[2] = true;
         fnSomaPonto();
 
@@ -936,7 +936,6 @@ function fnVerificar_quadcore() {
         /* Verifica se o usuário acertou todas */
         if (fnVerificarPontos(pontos_jogador)) {
             alert('Você ganhou!!');
-            clock.innerHTML = "00:00";
         }
     }
 
@@ -945,6 +944,7 @@ function fnVerificar_quadcore() {
 /* Função para verificar se o usuário "ganhou"*/
 function fnVerificarPontos(pontos) {
     if (pontos == 16) {
+        fnReiniciar();
         return true;
     } else {
         return false;
